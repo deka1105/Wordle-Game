@@ -32,15 +32,17 @@ def acceptInput(i, word, attempts):
                 confirmation = input("Enter [y/n]: ")
                 if (confirmation == 'y') or (confirmation == 'Y'):
                     # check for existing attempts
-
                     if i > 0:
                         if word_inp in attempts:
                             print("Similar attempt exists.")
                             print("Attempts: ", attempts)
                             print("Re-enter the word")
                         else:
-                            attempts.append(word_inp)
-                            valid_inp = 1
+                            if(di.checkWordExists(word_inp)):
+                                attempts.append(word_inp)
+                                valid_inp = 1
+                            else:
+                                print("Not a Dictionary word. Try Again")
                 else:
                     print("Re-enter the word")
             else:
