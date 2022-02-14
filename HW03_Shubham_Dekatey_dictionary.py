@@ -11,3 +11,14 @@ def getWordfromFile():
             lenWordList.append(i)
     my_word = random.choice(lenWordList)
     return my_word
+
+def checkWordExists(guessword):
+    allWordList = open('words.txt').read().split()
+    lenWordList = []
+    for i in allWordList:
+        if len(i) == 5:
+            lenWordList.append(i)
+    if guessword in lenWordList:
+        return 0
+    else:
+        return 1

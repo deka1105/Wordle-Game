@@ -24,9 +24,18 @@ def checker(word_inp, correctWord):
             resultString += "`"
     print(word_inp)
     print(resultString)
+    if(resultString == ""):
+        winCount += 1
+
+gameCount = 0
+winCount = 0
+guessDistribution = [0,0,0,0,0,0]
+
 
 def init():
     #global correctWord
+    
+    gameCount += 1
     correctWord = ui.initWordle()
     correctWord = correctWord.upper()
     print("Correct: " + correctWord)
@@ -35,11 +44,22 @@ def init():
     for i in range(1, 7):
         inWord = ui.acceptInput(i, correctWord, attempts)
         #attempts.append(inWord)
-        checker(inWord, correctWord)
+        status = checker(inWord, correctWord)
+        guessDistribution[i-1] += 1
+
+    printStats()
+
+def printStats():
+    print("gameCount: ", gameCount)
+    print(f"winCount: {winCount*100/gameCount: .2f}")
+    for i in range (1, 7):
+        print(f"guessed in {i} attempt: {guessDistribution[i-1]}")
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    init()
+    while(true):
+        init()
 
 #   The UI file imports Dictionary file
 #   The dictionary file has only 1 function to filter and return a random 5 letter word
