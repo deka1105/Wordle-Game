@@ -6,6 +6,9 @@ import HW03_Shubham_Dekatey_dictionary as dictionary
 from unittest.mock import patch
 class TesterIO(unittest.TestCase):
     
+    def testAttemptsEmpty(self) -> None:
+        """Check if 5Letter file is being created"""
+        self.assertEqual(dictionary.filter5letterWord(5), 0)
 
     def test_user_input_with_word(self) -> None :
         """Test when the input and the word is same"""
