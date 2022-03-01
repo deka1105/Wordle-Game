@@ -13,6 +13,15 @@ def initWordle():
     wordLength = len(word)
     return word
 
+def checkChar(word_inp):
+    return re.match("^[a-z A-Z]*$", word_inp)
+
+def checkAttempts(word_inp, attempts):
+    return (word_inp in attempts)
+
+def checkInp(word):
+    return len(word)
+    
 def acceptInput(i, word, attempts):
     valid_inp = 0
     wordLength = len(word)
@@ -27,7 +36,8 @@ def acceptInput(i, word, attempts):
         # Check input length, should be greater than length of word
         if len(word_inp) >= len(word):
             # Check if the first wordLength characters are only alphabets
-            if re.match("^[a-z A-Z]*$", word_inp):
+            #if re.match("^[a-z A-Z]*$", word_inp):
+            if checkChar(word_inp):
                 print("Your word:", word_inp)
                 log.writeLog("Your word:"+ word_inp)
                 word_inp = word_inp.upper()
@@ -36,7 +46,7 @@ def acceptInput(i, word, attempts):
                 if (confirmation == 'y') or (confirmation == 'Y'):
                     # check for existing attempts
                     if i > 0:
-                        if word_inp in attempts:
+                        if checkAttempts(word_inp, attempts):
                             print("Similar attempt exists.")
                             log.writeLog("Similar attempt exists.")
                             print("Attempts: ", attempts)

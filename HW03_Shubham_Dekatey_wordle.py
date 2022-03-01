@@ -6,7 +6,7 @@ def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
-def checker(word_inp, correctWord):
+def checker(word_inp, correctWord, winCount):
     #global correctWord
 
     # Save a temporary copy to ensure no manipulation to actual data
@@ -26,9 +26,16 @@ def checker(word_inp, correctWord):
     print(word_inp)
     log.writeLog("Input Word:" + word_inp)
     print(resultString)
+#logger
     log.writeLog("Output String" + resultString)
+#=======
+    if (len(resultString.strip()) == 0):
+        resultString = ""
+#    print(len(resultString.strip()))
+#>>>>>>> main
     if(resultString == ""):
         winCount += 1
+        return 1
 
 gameCount = 0
 winCount = 0
@@ -48,7 +55,7 @@ def init():
     for i in range(1, 7):
         inWord = ui.acceptInput(i, correctWord, attempts)
         #attempts.append(inWord)
-        status = checker(inWord, correctWord)
+        status = checker(inWord, correctWord, winCount)
         guessDistribution[i-1] += 1
 
     printStats()
