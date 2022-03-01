@@ -1,4 +1,5 @@
 import HW03_Shubham_Dekatey_ui as ui
+import logger as log
 
 # correctWord = ""
 def print_hi(name):
@@ -23,7 +24,9 @@ def checker(word_inp, correctWord):
         else:
             resultString += "`"
     print(word_inp)
+    log.writeLog("Input Word:" + word_inp)
     print(resultString)
+    log.writeLog("Output String" + resultString)
     if(resultString == ""):
         winCount += 1
 
@@ -39,6 +42,7 @@ def init():
     correctWord = ui.initWordle()
     correctWord = correctWord.upper()
     print("Correct: " + correctWord)
+    log.writeLog("Correct: " + correctWord)
     # loop for 6 unique input of strings
     attempts = []
     for i in range(1, 7):
@@ -52,8 +56,11 @@ def init():
 def printStats():
     print("gameCount: ", gameCount)
     print(f"winCount: {winCount*100/gameCount: .2f}")
+    log.writeLog("gameCount: "+ str(gameCount))
+    log.writeLog("winCount: " + str((winCount*100)/gameCount))
     for i in range (1, 7):
         print(f"guessed in {i} attempt: {guessDistribution[i-1]}")
+        log.writeLog("guessed in "+ str(i) + " attempt: "  +str(guessDistribution[i-1]))
 
 
 # Press the green button in the gutter to run the script.
