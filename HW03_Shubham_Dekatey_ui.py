@@ -1,6 +1,6 @@
 import HW03_Shubham_Dekatey_dictionary as di
 import re
-
+import logger as log
 # word = ""
 # wordLength = 0
 # attempts = []
@@ -8,6 +8,7 @@ import re
 
 def initWordle():
     global word, wordLength
+    di.filterletterWord(5)
     word = di.getWordfromFile()
     wordLength = len(word)
     return word
@@ -25,6 +26,7 @@ def acceptInput(i, word, attempts):
     valid_inp = 0
     wordLength = len(word)
     print("Attempt: ", i)
+    log.writeLog("Attempt: " + str(i))
     # global attempts
     # Loop till a valid attempt is made
     while valid_inp == 0:
@@ -37,6 +39,7 @@ def acceptInput(i, word, attempts):
             #if re.match("^[a-z A-Z]*$", word_inp):
             if checkChar(word_inp):
                 print("Your word:", word_inp)
+                log.writeLog("Your word:"+ word_inp)
                 word_inp = word_inp.upper()
                 # Seek confirmation to proceed
                 confirmation = input("Enter [y/n]: ")
@@ -45,20 +48,27 @@ def acceptInput(i, word, attempts):
                     if i > 0:
                         if checkAttempts(word_inp, attempts):
                             print("Similar attempt exists.")
+                            log.writeLog("Similar attempt exists.")
                             print("Attempts: ", attempts)
+                            log.writeLog("Attempts: ", str(attempts))
                             print("Re-enter the word")
+                            log.writeLog("Re-enter the word")
                         else:
                             if(di.checkWordExists(word_inp)):
                                 attempts.append(word_inp)
                                 valid_inp = 1
                             else:
                                 print("Not a Dictionary word. Try Again")
+                                log.writeLog("Not a Dictionary word. Try Again")
                 else:
                     print("Re-enter the word")
+                    log.writeLog("Re-enter the word")
             else:
                 print("Word can contain only Alphabetic values [A-Z] or [a-z]")
+                log.writeLog("Word can contain only Alphabetic values [A-Z] or [a-z]")
         else:
             print("Re-enter a word with atleast" + wordLength + "alphabetic characters")
+            log.writeLog("Re-enter a word with atleast" + str(wordLength) + "alphabetic characters")
     # Convert input string to upper case for better comparison
     word_inp = word_inp.upper()
     #attempts.append(word_inp)
