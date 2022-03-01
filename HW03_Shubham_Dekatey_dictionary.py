@@ -20,6 +20,7 @@ def filter5letterWord(wordLen):
         log.writeLog("filterWords.txt Created")
         return len(lenWordList)
     except:
+        return 0
         print("filterWords.txt creation error")
         log.writeLog("filterWords.txt creation error")
 

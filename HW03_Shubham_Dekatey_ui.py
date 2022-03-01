@@ -14,6 +14,7 @@ def initWordle():
         wordLength = len(word)
         return word
     except:
+        return("_")
         print("Game ui.initWordle Error")
 
 def acceptInput(i, word, attempts):
@@ -68,6 +69,7 @@ def acceptInput(i, word, attempts):
         #attempts.append(word_inp)
         return word_inp
     except:
+        return "_"
         print("Game ui.acceptInput Error")
         
 
