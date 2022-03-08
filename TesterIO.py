@@ -56,5 +56,10 @@ class TesterIO(unittest.TestCase):
         self.assertTrue(ui.checkAttempts("melon", ["melon"]), 1)
 
 
+    def check_file_freq(self) -> None:
+        """Check if the Frequeny CSV file is created"""
+
+    def check_file_rank(self) -> None:
+        """Check if the Rank CSV file is created"""
 if __name__ == '__main__':
     unittest.main()
