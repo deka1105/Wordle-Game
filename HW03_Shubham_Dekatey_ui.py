@@ -7,7 +7,20 @@ import re
 
 class UiX:
 
+
     globalAttempts = []
+
+    def initWordle():
+        try:
+            global word, wordLength
+            di.filterletterWord(5)
+            word = di.getWordfromFile()
+            wordLength = len(word)
+            return word
+        except:
+            return("_")
+            print("Game ui.initWordle Error")
+
 
     def __init__():
         try:
@@ -87,4 +100,5 @@ class UiX:
         except:
             print("Game ui.acceptInput Error")
             
+
 
