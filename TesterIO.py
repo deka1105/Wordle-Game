@@ -1,8 +1,8 @@
 
 import unittest
-import HW03_Shubham_Dekatey_ui as ui
-import HW03_Shubham_Dekatey_wordle as wordle
-import HW03_Shubham_Dekatey_dictionary as dictionary
+from HW03_Shubham_Dekatey_ui import UiX as ui
+from HW03_Shubham_Dekatey_wordle import WordleX as wordle
+from HW03_Shubham_Dekatey_dictionary import DictionaryX as dictionary
 from unittest.mock import patch
 class TesterIO(unittest.TestCase):
     

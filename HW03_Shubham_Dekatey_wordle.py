@@ -1,80 +1,107 @@
-import HW03_Shubham_Dekatey_ui as ui
-import logger as log
+import imp
+from HW03_Shubham_Dekatey_ui import UiX as ui
+from logger import LogX as log
 
-# correctWord = ""
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+class WordleX:
+    # correctWord = ""
+    gameCount = 0
+    winCount = 0
+    guessDistribution = [0,0,0,0,0,0]
 
-def checker(word_inp, correctWord):
-    try:
+    def __init__(self):
         #global correctWord
+        try:
+            gameCount += 1
+            correctWord = ui.initWordle()
+            correctWord = correctWord.upper()
+            print("Correct: " + correctWord)
+            log.writeLog("Correct: " + correctWord)
+            # loop for 6 unique input of strings
+            attempts = []
+            for i in range(1, 7):
+                inWord = ui.acceptInput(i, correctWord, attempts)
+                #attempts.append(inWord)
+                status = self.checker(inWord, correctWord)
+                self.guessDistribution[i-1] += 1
 
-        # Save a temporary copy to ensure no manipulation to actual data
-        tempWord = correctWord
-        resultString = ""
+            self.printStats()
+        except:
+            print("Game Wordle.init Error")
 
-        print("Processing word: ", word_inp)
-        for index in range(0, len(word_inp)):
-            if(correctWord[index] == word_inp[index]):
-                tempWord = tempWord.replace(word_inp[index], "", 1)
-                resultString += " "
-            elif (tempWord.find(word_inp[index]) > -1):
-                tempWord = tempWord.replace(word_inp[index], "", 1)
-                resultString += '"'
-            else:
-                resultString += "`"
-        print(word_inp)
-        log.writeLog("Input Word:" + word_inp)
-        print(resultString)
-        log.writeLog("Output String" + resultString)
-        if(resultString == ""):
-            winCount += 1
-    except:
-        print("Game Wordle.checker Error")
-gameCount = 0
-winCount = 0
-guessDistribution = [0,0,0,0,0,0]
+    def __str__(self):
+        #print("X")
+        return f"Wordle(gamesPlayed:{str(self.gamesPlayed)}, gamesWon:{str(self.gamesWon)}, guessDistribution:{str(self.guessDistribution)})"
+
+    def print_hi(name):
+        # Use a breakpoint in the code line below to debug your script.
+        print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+
+    def checker(word_inp, correctWord):
+        try:
+            #global correctWord
+
+            # Save a temporary copy to ensure no manipulation to actual data
+            tempWord = correctWord
+            resultString = ""
+
+            print("Processing word: ", word_inp)
+            for index in range(0, len(word_inp)):
+                if(correctWord[index] == word_inp[index]):
+                    tempWord = tempWord.replace(word_inp[index], "", 1)
+                    resultString += " "
+                elif (tempWord.find(word_inp[index]) > -1):
+                    tempWord = tempWord.replace(word_inp[index], "", 1)
+                    resultString += '"'
+                else:
+                    resultString += "`"
+            print(word_inp)
+            log.writeLog("Input Word:" + word_inp)
+            print(resultString)
+            log.writeLog("Output String" + resultString)
+            if(resultString == ""):
+                winCount += 1
+        except:
+            print("Game Wordle.checker Error")
+    
+
+    def init(self):
+        #global correctWord
+        try:
+            gameCount += 1
+            correctWord = ui.initWordle()
+            correctWord = correctWord.upper()
+            print("Correct: " + correctWord)
+            log.writeLog("Correct: " + correctWord)
+            # loop for 6 unique input of strings
+            attempts = []
+            for i in range(1, 7):
+                inWord = ui.acceptInput(i, correctWord, attempts)
+                #attempts.append(inWord)
+                status = self.checker(inWord, correctWord)
+                self.guessDistribution[i-1] += 1
+
+            self.printStats()
+        except:
+            print("Game Wordle.init Error")
 
 
-def init():
-    #global correctWord
-    try:
-        gameCount += 1
-        correctWord = ui.initWordle()
-        correctWord = correctWord.upper()
-        print("Correct: " + correctWord)
-        log.writeLog("Correct: " + correctWord)
-        # loop for 6 unique input of strings
-        attempts = []
-        for i in range(1, 7):
-            inWord = ui.acceptInput(i, correctWord, attempts)
-            #attempts.append(inWord)
-            status = checker(inWord, correctWord)
-            guessDistribution[i-1] += 1
+    def printStats(self):
+        try:
+            print("gameCount: ", self.gameCount)
+            print(f"winCount: {self.winCount*100/self.gameCount: .2f}")
+            log.writeLog("gameCount: "+ str(self.gameCount))
+            log.writeLog("winCount: " + str((self.winCount*100)/self.gameCount))
+            for i in range (1, 7):
+                print(f"guessed in {i} attempt: {self.guessDistribution[i-1]}")
+                log.writeLog("guessed in "+ str(i) + " attempt: "  +str(self.guessDistribution[i-1]))
+            attempts = []
+        except:
+            print("Game Stats Error")
 
-        printStats()
-    except:
-        print("Game Wordle.init Error")
-
-
-def printStats():
-    try:
-        print("gameCount: ", gameCount)
-        print(f"winCount: {winCount*100/gameCount: .2f}")
-        log.writeLog("gameCount: "+ str(gameCount))
-        log.writeLog("winCount: " + str((winCount*100)/gameCount))
-        for i in range (1, 7):
-            print(f"guessed in {i} attempt: {guessDistribution[i-1]}")
-            log.writeLog("guessed in "+ str(i) + " attempt: "  +str(guessDistribution[i-1]))
-        attempts = []
-    except:
-        print("Game Stats Error")
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    while(true):
-        init()
+    # Press the green button in the gutter to run the script.
+    if __name__ == '__main__':
+        while(True):
+            init()
 
 #   The UI file imports Dictionary file
 #   The dictionary file has only 1 function to filter and return a random 5 letter word
