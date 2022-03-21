@@ -6,8 +6,6 @@ import re
 # attempts = []
 
 class UiX:
-
-
     globalAttempts = []
 
     def initWordle():
