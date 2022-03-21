@@ -58,8 +58,16 @@ class TesterIO(unittest.TestCase):
 
     def check_file_freq(self) -> None:
         """Check if the Frequeny CSV file is created"""
-
+        import pathlib as pl
+        path = pl.Path("letterFrequency.csv")
+        self.assertEquals((str(path), path.is_file()), (str(path), True))
+        
     def check_file_rank(self) -> None:
         """Check if the Rank CSV file is created"""
+        import pathlib as pl
+        path = pl.Path("wordRank.csv")
+        self.assertEquals((str(path), path.is_file()), (str(path), True))
+
+
 if __name__ == '__main__':
     unittest.main()
