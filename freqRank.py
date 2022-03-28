@@ -1,5 +1,8 @@
 
 from glob import glob
+import logging
+
+from logger import LogX
 
 
 listWords = []
@@ -11,14 +14,14 @@ freqTup = {}
 
 def readfile():
     try:
-        log.writeLog("Loading filterWords.txt")
+        LogX.writeLog("Loading filterWords.txt")
         lenWordList = open('filterWords.txt').read().split()
         global listWords
         listWords = lenWordList
         return True
     except:
         print("filterWords.txt Loading error")
-        log.writeLog("filterWords.txt Loading error")
+        LogX.writeLog("filterWords.txt Loading error")
     
 
     # return my_word
