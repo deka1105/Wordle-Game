@@ -1,6 +1,7 @@
 import imp
 from HW03_Shubham_Dekatey_ui import UiX as ui
 from logger import LogX as log
+from solver import SolverX
 
 class WordleX:
     # correctWord = ""
@@ -14,6 +15,7 @@ class WordleX:
             gameCount += 1
             correctWord = ui.initWordle()
             correctWord = correctWord.upper()
+            s = SolverX(correctWord)
             print("Correct: " + correctWord)
             log.writeLog("Correct: " + correctWord)
             # loop for 6 unique input of strings
